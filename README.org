@@ -1,6 +1,6 @@
 * Nyaatouch
 Nyaatouch is a highly ergonomic [[https://en.wikipedia.org/wiki/Dvorak_keyboard_layout][dvorak]] modal editing scheme for [[https://www.gnu.org/software/emacs/][emacs]].
-It is built on the [[https://github.com/meow-edit/meow][meow]] modal framework, which I also help maintain.
+It is built on the [[https://github.com/meow-edit/meow][meow]] modal framework (hence the name), which I also help maintain. Lots of code has been upstreamed into meow to make this system possible.
 
 Meow is a fantastic platform to build a custom editing scheme on for
 several reasons
