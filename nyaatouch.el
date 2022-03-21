@@ -174,12 +174,12 @@ region. Otherwise, upcase the whole region."
 
 ;; other actions
 (meow-normal-define-key
- '("w" . meow-cancel-selection)
+ '("m" . meow-cancel-selection)
  '("j" . meow-grab)
- '("v" . repeat)
+ '("w" . repeat)
  '("q" . meow-quit)
  '("b" . meow-paren-mode)
- '("z" . meow-pop)
+ '("z" . meow-pop-selection)
  '("<escape>" . ignore))
 
 ;; extras
@@ -224,7 +224,7 @@ region. Otherwise, upcase the whole region."
   '("G" . sp-goto-top)
   '("y" . sp-transpose-sexp)
   '("Y" . (lambda () (interactive) (sp-transpose-sexp -1)))
-  '("p" . meow-undo))
+  '("l" . meow-undo))
 
 (setq meow-keypad-start-keys
       '((?c . ?c)

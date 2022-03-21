@@ -1,0 +1,165 @@
+* Nyaatouch
+Nyaatouch is a highly ergonomic [[https://en.wikipedia.org/wiki/Dvorak_keyboard_layout][dvorak]] modal editing scheme for [[https://www.gnu.org/software/emacs/][emacs]].
+It is built on the [[https://github.com/meow-edit/meow][meow]] modal framework, which I also help maintain.
+
+Meow is a fantastic platform to build a custom editing scheme on for
+several reasons
+- minimal configuration (no keybindings by default!!)
+- self contained, with no dependencies
+- allows truly arbitrary keybindings by key macros, which gives a lot
+  of freedom
+- makes it very easy to create custom modal states
+
+If you're interested in more about why vanilla meow is neat,
+especially in contrast to something more traditional like vim or
+kakoune you might like [[https://www.esrh.me/posts/2021-12-18-switching-to-meow.html][this]] blog post I wrote.
+
+This package pulls in some other packages I find absolutely necessary
+for editing programs:
++ [[https://github.com/abo-abo/avy][avy]] - jumping to places
++ [[https://github.com/abo-abo/swiper][swiper]] - extremely neat incremental searcher
++ [[https://github.com/Fuco1/smartparens][smartparens]] - generic bracket manipulation
+  
+Nyaatouch is essentially my personal config, except when I realized that
+just my editing related config had grown to nearly 300 lines and
+resembled nothing else I know of, I decided to create a package for
+it.
+
+* Documentation/Rationale
+
+Nyaatouch is exclusively and strongly focused on ergonomics. This
+means that ideas like mnemonic commands and the like totally go out
+the window -- keys are assigned to commands based on position,
+comfort, and frequency.
+
+Spatially assigned keys take strong influence from dvorak, which
+emphasizes alternating hands by spatially separating the vowels and
+consonants. In nyaatouch, this is achieved by spatially separating
+selections and actions on selections. This means that a wide variety
+of useful things can be done by a near instant hand alternation, often
+without even moving your hands from the home row.
+
+For instance, deleting a word in nyaatouch is =es=, which is far more
+comfortable than say, =diw= in either qwerty or dvorak vim. There's also
+a lot more abstraction and consistency in the notion of formalized
+"things" and the alternation pattern.
+
+Another key change that nyaatouch makes is to swap C-x to C-u. This is
+stolen from the emacswiki, and is a genius idea. C-u is not used
+nearly as often, and putting it under the pointer is super neat, for
+example saving file is basically free with holding control and
+pressing the hand alternating sequence =us=. This is why I didn't remap
+it into the leader like I did with many other uncomfortable C-x
+bindings that are still bad with this modification.
+
+
+* Reference
+Row wise, here's what each key does.
+
+** Top row
+- 1..9 :: expansion hints
+- * :: toggle case with intelligent behavior. see source for details.
+** Upper row
+- ' :: prompt for char and find forward
+- " :: prompt for char and find backward
+- , :: meow's inner of thing, selects some object without the delimiters
+- . :: meow's bounds of thing, selects some object with the delimiters
+- < :: beginning of thing
+- > :: end of thing
+- p :: meow-join, selects from the last char of the previous line to
+  the first char of the current line
+- f :: move left
+- g :: move up
+- c :: move down
+- r :: move right
+- F..R :: expand selection in corresponding direction
+- l :: undo
+- / :: avy jump to word by one char
+- + :: add one to number under point. accepts numeric prefix arg.
+** Home row
+*** Left hand
+- a :: select line
+- o :: select inside string *
+- O :: select whole string
+- e :: select word
+- E :: select symbol (according to symbol table)
+- u :: select block (matching brackets)
+- i :: select paragraph
+*** Right hand
+- d :: yank, copy.
+- D :: paste
+- h :: *insert at cursor*, literally, insert wherever the cursor
+  is. This is different to standard meow-insert.
+- H :: meow-insert, always inserts at the beginning of a selection
+- t :: change. Delete and then enter insert. If no selection, then
+  delete one char.
+- T :: replace
+- n :: open line below
+- N :: open line above
+- S :: kill.
+- - :: swiper (better incremental search)
+- _ :: subtract one from the number under point. Accepts prefix arg.
+** Bottom row
+- ; :: exchange point and mark.
+- q :: quit
+- j :: enter meow's standard beacon state
+- k :: back word
+- x :: forward word
+- K, X :: back and forward symbols
+- b :: enter paren state
+- m :: cancel selection
+- w :: repeat command
+- z :: pop selection marker
+** Paren state bindings
+The parenthesis state is a custom nyaatouch state to facilitate
+dealing with pairs of characters. It uses smartparens as a backend for
+most commands.
+- fgcr :: movement
+- o + {s, r, c, g} :: wrap with square, round, curly, string
+- O :: unwrap
+- b :: slurp
+- x :: barf
+- k :: back barf
+- j :: back slurp
+- s,S :: splice forward and back
+- e :: end of sexp
+- a :: beginning of sexp
+- G :: goto top level paren
+- y, Y :: transpose, forward and back
+- l :: undo
+** Leader bindings
+- a :: M-x (extended command)
+- e :: C-x b (switch buffer)
+- o :: C-h (help prefix)
+- u :: C-x C-f (find file)
+- h :: C-x o (other window) on my setup this is actually ace-window.
+- t :: C-x 0 (close window)
+- T :: C-x 1 (close every other window but this one)
+- n :: C-x 3 (vert split)
+- N :: C-x 2 (horiz split)
+- , :: maps to g in programs that need g like magit
+- . :: maps to c in programs that need it
+- l :: toggle meow using the system clipboard
+** Extra thing
+- x :: selects latex objects. These can be begin/end envs, parens or
+  dollar signs.
+
+* Usage
+In the off chance you're crazy enough to give this a shot, you can
+either download the file and add it to your load-path, or use this
+MELPA-flavor recipe:
+
+#+BEGIN_SRC emacs-lisp
+'(nyaatouch :repo "eshrh/nyaatouch" :fetcher github)
+#+END_SRC
+
+You can give that list to straight-use-package or whatever other
+program you may use. Then, usage is just:
+
+#+BEGIN_SRC emacs-lisp
+(require 'nyaatouch)
+(turn-on-nyaatouch)
+#+END_SRC
+
+=turn-off-nyaatouch= also exists and may be of interest.
+
