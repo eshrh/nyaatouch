@@ -34,7 +34,7 @@
 (define-key key-translation-map [?\C-x] [?\C-u])
 (define-key key-translation-map [?\C-u] [?\C-x])
 
-(defun meow-negative-find ()
+(defun nt-negative-find ()
   (interactive)
   (let ((current-prefix-arg -1))
     (call-interactively 'meow-find)))
@@ -50,7 +50,7 @@
       (delete-char 1)
       (insert (downcase ch)))))
 
-(defun toggle-case-dwiam ()
+(defun nt-toggle-case-dwiam ()
   "toggle cases, do what i actually mean:
 
 If no region is active, toggle between upcase and downcase on the
@@ -73,7 +73,7 @@ region. Otherwise, upcase the whole region."
   (delete-region strt end)
   (insert (number-to-string content)))
 
-(defun add-number (arg)
+(defun nt-add-number (arg)
   (interactive "P")
   (let* ((num (thing-at-point 'number t))
          (bounds (bounds-of-thing-at-point 'word))
@@ -84,18 +84,18 @@ region. Otherwise, upcase the whole region."
         (replace-bounds strt end (+ num arg))
       (replace-bounds strt end (+ num 1)))))
 
-(defun subtract-one ()
+(defun nt-subtract-one ()
   (interactive)
   (let ((current-prefix-arg -1))
     (call-interactively 'add-number)))
 
-(defun sp-goto-top ()
+(defun nt-goto-top ()
   (interactive)
   (let ((res (sp-up-sexp)))
     (while res
       (setq res (sp-up-sexp)))))
 
-(defun meow-insert-at-cursor ()
+(defun nt-insert-at-cursor ()
   (interactive)
   (if meow--temp-normal
       (progn
@@ -127,7 +127,7 @@ region. Otherwise, upcase the whole region."
 ;; movement
 (meow-normal-define-key
  '("'" . meow-find)
- '("\"" . meow-negative-find)
+ '("\"" . nt-negative-find)
  '("<" . meow-beginning-of-thing)
  '(">" . meow-end-of-thing)
  '("k" . meow-back-word)
@@ -144,25 +144,29 @@ region. Otherwise, upcase the whole region."
  '("f" . meow-left)
  '("F" . meow-left-expand))
 
+(defun nt-inner-str () (interactive) (meow-inner-of-thing 'string))
+(defun nt-bounds-str () (interactive) (meow-inner-of-thing 'string))
+(defun nt-paragraph () (interactive) (meow-inner-of-thing 'string))
+
 ;; selection
 (meow-normal-define-key
  '("," . meow-inner-of-thing)
  '("." . meow-bounds-of-thing)
  '("a" . meow-line)
- '("o" . (lambda () (interactive) (meow-inner-of-thing 'string)))
- '("O" . (lambda () (interactive) (meow-bounds-of-thing 'string)))
+ '("o" . nt-inner-str)
+ '("O" . nt-bounds-str)
  '("e" . meow-mark-word)
  '("E" . meow-mark-symbol)
  '("u" . meow-block)
  '("U" . meow-block-expand)
  '("p" . meow-join)
- '("i" . (lambda () (interactive) (meow-inner-of-thing 'paragraph))))
+ '("i" . nt-paragraph))
 
 ;; selection actions
 (meow-normal-define-key
  '("D" . meow-yank)
  '("d" . meow-save)
- '("h" . meow-insert-at-cursor)
+ '("h" . nt-insert-at-cursor)
  '("H" . meow-insert)
  '("t" . meow-change)
  '("T" . meow-replace)
@@ -184,9 +188,9 @@ region. Otherwise, upcase the whole region."
 
 ;; extras
 (meow-normal-define-key
- '("*" . toggle-case-dwiam)
- '("+" . add-number)
- '("_" . subtract-one)
+ '("*" . nt-toggle-case-dwiam)
+ '("+" . nt-add-number)
+ '("_" . nt-subtract-one)
  '("/" . avy-goto-word-1)
  '("-" . swiper))
 
@@ -199,6 +203,9 @@ region. Otherwise, upcase the whole region."
 
 (setq meow-cursor-type-paren 'hollow)
 
+(defun nt-wrap-string () (interactive) (sp-wrap-with-pair "\""))
+(defun nt-back-transpose () (interactive) (sp-transpose-sexp -1))
+
 (meow-define-keys 'paren
   '("<escape>" . meow-normal-mode)
   '("f" . sp-backward-sexp)
@@ -208,7 +215,7 @@ region. Otherwise, upcase the whole region."
   '("o s" . sp-wrap-square)
   '("o r" . sp-wrap-round)
   '("o c" . sp-wrap-curly)
-  '("o g" . (lambda () (interactive) (sp-wrap-with-pair "\"")))
+  '("o g" . nt-wrap-string)
   '("O" . sp-unwrap-sexp)
   '("b" . sp-slurp-hybrid-sexp)
   '("x" . sp-forward-barf-sexp)
@@ -223,7 +230,7 @@ region. Otherwise, upcase the whole region."
   '("a" . sp-beginning-of-sexp)
   '("G" . sp-goto-top)
   '("y" . sp-transpose-sexp)
-  '("Y" . (lambda () (interactive) (sp-transpose-sexp -1)))
+  '("Y" . nt-back-transpose)
   '("l" . meow-undo))
 
 (setq meow-keypad-start-keys
@@ -287,6 +294,17 @@ region. Otherwise, upcase the whole region."
 (setq meow-expand-exclude-mode-list '())
 
 (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
+
+(setq meow-command-to-short-name-list
+      (append meow-command-to-short-name-list
+              '((nt-add-number . "+num")
+                (nt-bounds-str . "[str]")
+                (nt-inner-str . "←str→")
+                (nt-insert-at-cursor . "ins.")
+                (nt-negative-find . "←find")
+                (nt-paragraph . "[para]")
+                (nt-subtract-one . "-1")
+                (nt-toggle-case-dwiam . "case"))))
 
 ;;;###autoload
 (defun turn-on-nyaatouch ()
