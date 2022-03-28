@@ -104,6 +104,29 @@ region. Otherwise, upcase the whole region."
     (meow--cancel-selection)
     (meow--switch-state 'insert)))
 
+
+(defun nt-duplicate ()
+  "Duplicate region if active. Otherwise duplicate char at point"
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (meow-save)
+        (meow-yank))
+    (progn
+      (meow-save-char)
+      (meow-yank))))
+
+(defun nt-duplicate-and-comment ()
+  "Duplicate region and then comment region"
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (meow-save)
+        (meow-yank)
+        (comment-or-uncomment-region
+         (region-beginning)
+         (region-end)))))
+
 (setq meow-cheatsheet-layout meow-cheatsheet-layout-dvorak)
 (meow-motion-overwrite-define-key
  '("g" . meow-next)
@@ -191,7 +214,9 @@ region. Otherwise, upcase the whole region."
  '("*" . nt-toggle-case-dwiam)
  '("+" . nt-add-number)
  '("_" . nt-subtract-one)
- '("/" . avy-goto-word-1)
+ '("/" . nt-duplicate)
+ '("?" . nt-duplicate-comment)
+ '("m" . avy-goto-word-1)
  '("-" . swiper))
 
 (setq meow-paren-keymap (make-keymap))
