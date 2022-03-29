@@ -193,7 +193,7 @@ either download the file and add it to your load-path, or use this
 MELPA-flavor recipe:
 
 #+BEGIN_SRC emacs-lisp
-'(nyaatouch :repo "eshrh/nyaatouch" :fetcher github)
+'(nyaatouch :repo "https://github.com/eshrh/nyaatouch" :fetcher github)
 #+END_SRC
 
 You can give that list to straight-use-package or whatever other
