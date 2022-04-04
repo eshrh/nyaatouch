@@ -1,4 +1,5 @@
 * Nyaatouch
+
 Nyaatouch is a highly ergonomic [[https://en.wikipedia.org/wiki/Dvorak_keyboard_layout][dvorak]] modal editing scheme for [[https://www.gnu.org/software/emacs/][emacs]].
 It is built on the [[https://github.com/meow-edit/meow][meow]] modal framework (hence the name), which I also help maintain. Lots of code has been upstreamed into meow to make this system possible. If you're stumbling onto this repository and you either don't use dvorak or would like something a little more traditional but still efficient, I'd suggest checking that project out first.
 
@@ -44,6 +45,10 @@ comfortable than say, =diw= in either qwerty or dvorak vim. There's also
 a lot more abstraction and consistency in the notion of formalized
 "things" and the alternation pattern.
 
+Selecting inside a matched pair of parens, copying the contents,
+moving a line below and then pasting is =idhD=. Compare this to
+=vi(yp=. Unusable on dvorak!
+
 Another key change that nyaatouch makes is to swap C-x to C-u. This is
 stolen from the emacswiki, and is a genius idea. C-u is not used
 nearly as often, and putting it under the pointer is super neat, for
@@ -51,7 +56,27 @@ example saving file is basically free with holding control and
 pressing the hand alternating sequence =us=. This is why I didn't remap
 it into the leader like I did with many other uncomfortable C-x
 bindings that are still bad with this modification.
+** Notes on the movement keys
+For some time, i experimented with putting the movement keys on
+fgcr. I think this definitely has some merits, especially with regards
+to consistency, but it also has two practical problems.
 
+1. Loss of alternation. With insert on j and the movement keys on top
+   row, you lose some alternation action. After all, insert is rarely
+   pressed with a selection active. The only reason to select
+   something is to act on it directly.
+2. gc are important. in magit for instance, g is refresh and c is
+   commit. These are nice keybindings, and I don't want to change
+   them.
+
+The compromise that I use here is to put up/down back on the home row,
+but leave left and right, which are less used, on the top row. Now
+that c is free though, we can shift right to be on c, where it is
+slightly more comfortable.
+
+The other compromise made for this is to move open new line up
+to g. Change/replace on a selection is far too essential to leave the
+home row in an alternation focused layout, and is therefore on n.
 
 * Reference
 
@@ -63,25 +88,23 @@ bindings that are still bad with this modification.
 ┃         |         |         |         |         |         |         |         |     case|         |         |         |         |             ┃
 ┠─┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┤             ┃
 ┃       ` │       1 │       2 │       3 │       4 │       5 │       6 │       7 │       8 │       9 │       0 │       [ │       ] │             ┃
-┃         |    ex →1|    ex →2|    ex →3|    ex →4|    ex →5|    ex →6|    ex →7|    ex →8|    ex →9|    ex →0|         |         |             ┃
+┃         |   ex →1|    ex →2     ex →3     ex →4     ex →5     ex →6     ex →7     ex →8     ex →9     ex →0 |         |             ┃
 ┠─────────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────────┨
 ┃        TAB  │       " │       < │       > │       P │       Y │       F │       G │       C │       R │       L │       ? │       + │       | ┃
-┃             |    ←find|   ←thing|   thing→|         |         |     ex ←|     ex ↓|     ex ↑|     ex →| undo-sel|         |     +num|         ┃
-┃             ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┨
-┃             │       ' │       , │       . │       p │       y │       f │       g │       c │       r │       l │       / │       = │       \ ┃
-┃             |     find|  ←thing→|  [thing]|     join|         |        ←|        ↓|        ↑|        →|     undo|avy-goto…|         |         ┃
-┠─────────────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─────────┨
-┃               │       A │       O │       E │       U │       I │       D │       H │       T │       N │       S │       _ │             RET ┃
-┃               |         |    [str]|    ←sym→|block-ex…|         |     yank|   insert|      rep|   open ↑|         |       -1│                 ┃
+┃             |   ←find|   ←thing    thing→                          ex ←    open ↑      ex →      ex →   undo-sel nt-dupli…      +num                   ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┨
+┃             │       ' │       , │       . │       p │       y │       f │       g │       c │       r │       l │       / │       = │         ┃
+┃             |     find|←thing→|    [thing]      join                  ←    open ↓         →         →       undo nt-dupli…                  \ ──────────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─────────┨
+┃               │       A │       O │       E │       U │       I │       D │       H │       T │       N │       S │       _ │                 ┃
+┃               |         |    [str]|  ←sym→|     insert block-ex…      yank     ex ↓      ex ↑        rep                  -1              ┃
 ┃               ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┤                 ┃
 ┃               │       a │       o │       e │       u │       i │       d │       h │       t │       n │       s │       - │                 ┃
-┃               |     line|    ←str→|   ←word→|    block|   [para]|     save|     ins.|      chg|   open ↓|     kill|   swiper|                 ┃
+┃               |     line|  ←str→|   ←word→        ins.     block      save        ↓         ↑        chg      kill    swiper            ┃
 ┠───────────────┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────┬───┴─────────────────┨
 ┃                     │       : │       Q │       J │       K │       X │       B │       M │       W │       V │       Z │                     ┃
-┃                     |         |         |         |     ←sym|     sym→|         |         |         |         |         |                     ┃
+┃                     |         |         |         |    ←sym|     sym→                                                                       ┃
 ┃                     ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┤                     ┃
 ┃                     │       ; │       q │       j │       k │       x │       b │       m │       w │       v │       z │                     ┃
-┃                     |  reverse|     quit|     grab|    ←word|    word→|paren-mo…| quit sel|   repeat|   repeat|  pop-sel|                     ┃
+┃                     |  reverse|     quit|     grab|   ←word|    word→  paren-mo… avy-goto…  quit sel    repeat   pop-sel                    ┃
 ┗━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━╅─────────┴─────────┴─────────┴─────────╆━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━┛
                                                     ┃                                   SPC ┃
                                                     ┃                                       ┃
@@ -94,9 +117,6 @@ ex means this command will expand current region.
     latex ->  x     round ->  r    square ->  s     curly ->  c    string ->  g
    symbol ->  e    window ->  w    buffer ->  b paragraph ->  p      line ->  l
     defun ->  d  sentence ->  .
-    
-#+END_SRC
-
 Row wise, here's what each key does.
 
 ** Top row
