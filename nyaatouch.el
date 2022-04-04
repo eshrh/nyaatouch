@@ -201,9 +201,9 @@ region. Otherwise, upcase the whole region."
 
 ;; other actions
 (meow-normal-define-key
- '("m" . meow-cancel-selection)
+ '("w" . meow-cancel-selection)
  '("j" . meow-grab)
- '("w" . repeat)
+ '("v" . repeat)
  '("q" . meow-quit)
  '("b" . meow-paren-mode)
  '("z" . meow-pop-selection)
@@ -215,7 +215,7 @@ region. Otherwise, upcase the whole region."
  '("+" . nt-add-number)
  '("_" . nt-subtract-one)
  '("/" . nt-duplicate)
- '("?" . nt-duplicate-comment)
+ '("?" . nt-duplicate-and-comment)
  '("m" . avy-goto-word-1)
  '("-" . swiper))
 
