@@ -129,8 +129,8 @@ region. Otherwise, upcase the whole region."
 
 (setq meow-cheatsheet-layout meow-cheatsheet-layout-dvorak)
 (meow-motion-overwrite-define-key
- '("g" . meow-next)
- '("c" . meow-prev)
+ '("h" . meow-next)
+ '("t" . meow-prev)
  '("<escape>" . ignore))
 
 ;; expansion
