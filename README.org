@@ -91,9 +91,9 @@ home row in an alternation focused layout, and is therefore on n.
 ┃         |   ex →1|    ex →2     ex →3     ex →4     ex →5     ex →6     ex →7     ex →8     ex →9     ex →0 |         |             ┃
 ┠─────────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────┴───┬─────────┨
 ┃        TAB  │       " │       < │       > │       P │       Y │       F │       G │       C │       R │       L │       ? │       + │       | ┃
-┃             |   ←find|   ←thing    thing→                          ex ←    open ↑      ex →      ex →   undo-sel nt-dupli…      +num                   ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┨
+┃             |   ←find|   ←thing    thing→                          ex ←    open ↑      ex →             undo-sel nt-dupli…      +num                    ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┨
 ┃             │       ' │       , │       . │       p │       y │       f │       g │       c │       r │       l │       / │       = │         ┃
-┃             |     find|←thing→|    [thing]      join                  ←    open ↓         →         →       undo nt-dupli…                  \ ──────────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─────────┨
+┃             |     find|←thing→|    [thing]      join                  ←    open ↓         →        del      undo nt-dupli…                  \ ───────────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─┬───────┴─────────┨
 ┃               │       A │       O │       E │       U │       I │       D │       H │       T │       N │       S │       _ │                 ┃
 ┃               |         |    [str]|  ←sym→|     insert block-ex…      yank     ex ↓      ex ↑        rep                  -1              ┃
 ┃               ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┤                 ┃
@@ -117,7 +117,6 @@ ex means this command will expand current region.
     latex ->  x     round ->  r    square ->  s     curly ->  c    string ->  g
    symbol ->  e    window ->  w    buffer ->  b paragraph ->  p      line ->  l
     defun ->  d  sentence ->  .
-Row wise, here's what each key does.
 #+END_SRC
 ** Top row
 - 1..9 :: expansion hints
