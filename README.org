@@ -118,7 +118,7 @@ ex means this command will expand current region.
    symbol ->  e    window ->  w    buffer ->  b paragraph ->  p      line ->  l
     defun ->  d  sentence ->  .
 Row wise, here's what each key does.
-
+#+END_SRC
 ** Top row
 - 1..9 :: expansion hints
 - * :: toggle case with intelligent behavior. see source for details.
@@ -132,12 +132,14 @@ Row wise, here's what each key does.
 - p :: meow-join, selects from the last char of the previous line to
   the first char of the current line
 - f :: move left
-- g :: move up
-- c :: move down
-- r :: move right
-- F..R :: expand selection in corresponding direction
+- g :: open down
+- G :: open up
+- c :: move right
+- r :: delete one char
+- FCHT :: expand selection in corresponding direction
 - l :: undo
-- / :: avy jump to word by one char
+- / :: Duplicate
+- ? :: Duplicate and comment the duplicated thing
 - + :: add one to number under point. accepts numeric prefix arg.
 ** Home row
 *** Left hand
@@ -146,24 +148,21 @@ Row wise, here's what each key does.
 - O :: select whole string
 - e :: select word
 - E :: select symbol (according to symbol table)
-- u :: select block (matching brackets)
-- i :: select paragraph
+- u :: insert AT CURSOR. This is different from meow-insert.
+- U :: standard meow-insert
+- i :: select block (matching parens)
 *** Right hand
 - d :: yank, copy.
 - D :: paste
-- h :: *insert at cursor*, literally, insert wherever the cursor
-  is. This is different to standard meow-insert.
-- H :: meow-insert, always inserts at the beginning of a selection
-- t :: change. Delete and then enter insert. If no selection, then
-  delete one char.
-- T :: replace
-- n :: open line below
-- N :: open line above
+- h :: move down
+- t :: move up
+- n :: change
+- N :: replace
 - S :: kill.
 - - :: swiper (better incremental search)
 - _ :: subtract one from the number under point. Accepts prefix arg.
 ** Bottom row
-- ; :: exchange point and mark.
+- ; :: exchange point and mark, reverse hint direction
 - q :: quit
 - j :: enter meow's standard beacon state
 - k :: back word

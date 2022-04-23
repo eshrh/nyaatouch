@@ -221,6 +221,9 @@ region. Otherwise, upcase the whole region."
  '("m" . avy-goto-word-1)
  '("-" . swiper))
 
+(define-key meow-beacon-state-keymap [remap nt-insert-at-cursor] 'meow-beacon-insert)
+
+
 (setq meow-paren-keymap (make-keymap))
 
 (meow-define-state paren
