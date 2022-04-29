@@ -167,8 +167,8 @@ region. Otherwise, upcase the whole region."
  '("f" . meow-left)
  '("F" . meow-left-expand))
 
-(defun ntinner-str () (interactive) (meow-inner-of-thing 'string))
-(defun nt-bounds-str () (interactive) (meow-inner-of-thing 'string))
+(defun nt-inner-str () (interactive) (meow-inner-of-thing 'string))
+(defun nt-bounds-str () (interactive) (meow-bounds-of-thing 'string))
 (defun nt-paragraph () (interactive) (meow-inner-of-thing 'string))
 
 ;; selection
@@ -279,8 +279,6 @@ region. Otherwise, upcase the whole region."
  '("n" . "C-x 3")
  '("N" . "C-x 2")
 
- '("," . "H-g")
- '("." . "H-c")
  '("1" . meow-digit-argument)
  '("2" . meow-digit-argument)
  '("3" . meow-digit-argument)
