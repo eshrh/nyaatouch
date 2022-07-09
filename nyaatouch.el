@@ -297,11 +297,11 @@ region. Otherwise, upcase the whole region."
                "\\\\end{.*?}\n\\|\\$"))
 
 (meow-thing-register 'latex
-		             latex-thing-regexp
+                     latex-thing-regexp
                      latex-thing-regexp)
 
 (add-to-list 'meow-char-thing-table
-	         (cons ?x 'latex))
+             (cons ?x 'latex))
 
 (setq meow-use-clipboard t)
 
