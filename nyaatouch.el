@@ -209,6 +209,8 @@ region. Otherwise, upcase the whole region."
  '("q" . meow-quit)
  '("b" . meow-paren-mode)
  '("z" . meow-pop-selection)
+ '("y" . xref-find-definitions)
+ '("Y" . xref-go-back)
  '("<escape>" . ignore))
 
 ;; extras
