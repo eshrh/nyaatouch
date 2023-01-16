@@ -34,10 +34,17 @@
 (define-key key-translation-map [?\C-x] [?\C-u])
 (define-key key-translation-map [?\C-u] [?\C-x])
 
+(defmacro nt--call-negative (form)
+  `(let ((current-prefix-arg -1))
+     (call-interactively ,form)))
+
 (defun nt-negative-find ()
   (interactive)
-  (let ((current-prefix-arg -1))
-    (call-interactively 'meow-find)))
+  (nt--call-negative 'meow-find))
+
+(defun nt-negative-till ()
+  (interactive)
+  (nt--call-negative 'meow-till))
 
 (put 'upcase-region 'disabled nil)
 
@@ -167,9 +174,9 @@ region. Otherwise, upcase the whole region."
  '("f" . meow-left)
  '("F" . meow-left-expand))
 
-(defun nt-inner-str () (interactive) (meow-inner-of-thing 'string))
-(defun nt-bounds-str () (interactive) (meow-bounds-of-thing 'string))
-(defun nt-paragraph () (interactive) (meow-inner-of-thing 'string))
+(defun nt-inner-str () (interactive) (meow-inner-of-thing ?g))
+(defun nt-bounds-str () (interactive) (meow-bounds-of-thing ?g))
+(defun nt-paragraph () (interactive) (meow-inner-of-thing ?p))
 
 ;; selection
 (meow-normal-define-key
