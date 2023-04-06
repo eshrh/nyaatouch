@@ -344,7 +344,9 @@ region. Otherwise, upcase the whole region."
 ;;;###autoload
 (defun turn-on-nyaatouch ()
   (interactive)
-  (meow-global-mode 1))
+  (meow-global-mode 1)
+  (unless (display-graphic-p)
+    (setq meow-esc-delay 0)))
 
 ;;;###autoload
 (defun turn-off-nyaatouch ()
