@@ -94,7 +94,7 @@ region. Otherwise, upcase the whole region."
 (defun nt-subtract-one ()
   (interactive)
   (let ((current-prefix-arg -1))
-    (call-interactively 'add-number)))
+    (call-interactively #'nt-add-number)))
 
 (defun nt-goto-top ()
   (interactive)
