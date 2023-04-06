@@ -158,8 +158,8 @@ region. Otherwise, upcase the whole region."
 (meow-normal-define-key
  '("'" . meow-find)
  '("\"" . nt-negative-find)
- '("<" . meow-beginning-of-thing)
- '(">" . meow-end-of-thing)
+ '("<" . beginning-of-buffer)
+ '(">" . end-of-buffer)
  '("k" . meow-back-word)
  '("K" . meow-back-symbol)
  '("x" . meow-next-word)
