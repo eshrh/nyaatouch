@@ -20,7 +20,8 @@ for editing programs:
 + [[https://github.com/abo-abo/avy][avy]] - jumping to places
 + [[https://github.com/abo-abo/swiper][swiper]] - extremely neat incremental searcher
 + [[https://github.com/Fuco1/smartparens][smartparens]] - generic bracket manipulation
-  
++ [[https://github.com/skissue/meow-tree-sitter][meow-tree-sitter]] - tree sitter thing selection
+
 Nyaatouch is essentially my personal config, except when I realized that
 just my editing related config had grown to nearly 300 lines and
 resembled nothing else I know of, I decided to create a package for
@@ -223,4 +224,3 @@ program you may use. Then, usage is just:
 #+END_SRC
 
 =turn-off-nyaatouch= also exists and may be of interest.
-

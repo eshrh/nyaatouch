@@ -2,7 +2,7 @@
 
 ;; Author: esrh
 ;; Keywords: modal-editing
-;; Package-Requires: ((avy "0.5.0") (swiper "0.13.0")(smartparens "1.11.0") (meow "1.4.2") (emacs "27.1"))
+;; Package-Requires: ((avy "0.5.0") (swiper "0.13.0")(smartparens "1.11.0") (meow "1.4.2") (meow-tree-sitter "2.0.0") (emacs "29"))
 ;; Version: 0.0.1
 ;;
 ;; This file is not part of GNU Emacs.
@@ -28,8 +28,11 @@
 (require 'meow)
 (require 'smartparens)
 (require 'avy)
+(require 'meow-tree-sitter)
 (require 'swiper)
 (require 'cl-lib)
+
+(meow-tree-sitter-register-defaults)
 
 (define-key key-translation-map [?\C-x] [?\C-u])
 (define-key key-translation-map [?\C-u] [?\C-x])
