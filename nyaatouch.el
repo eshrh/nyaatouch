@@ -132,10 +132,10 @@ region. Otherwise, upcase the whole region."
   (if (region-active-p)
       (progn
         (meow-save)
-        (meow-yank)
         (comment-or-uncomment-region
          (region-beginning)
-         (region-end)))))
+         (region-end))
+        (meow-yank))))
 
 (setq meow-cheatsheet-layout meow-cheatsheet-layout-dvorak)
 (meow-motion-overwrite-define-key
