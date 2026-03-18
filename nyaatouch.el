@@ -119,9 +119,11 @@ region. Otherwise, upcase the whole region."
   "Duplicate region if active. Otherwise duplicate char at point"
   (interactive)
   (if (region-active-p)
-      (progn
+      (let ((lines (count-lines (region-beginning) (region-end))))
         (meow-save)
-        (meow-yank))
+        (meow-yank)
+        (previous-line lines)
+        (message "%s" lines))
     (progn
       (meow-save-char)
       (meow-yank))))
@@ -219,6 +221,7 @@ region. Otherwise, upcase the whole region."
  '("q" . meow-quit)
  '("b" . meow-paren-mode)
  '("z" . meow-pop-selection)
+ '("P" . xref-find-references)
  '("y" . xref-find-definitions)
  '("Y" . xref-go-back)
  '("<escape>" . ignore))
